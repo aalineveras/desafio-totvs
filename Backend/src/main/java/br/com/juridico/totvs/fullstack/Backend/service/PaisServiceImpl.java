@@ -111,5 +111,14 @@ public class PaisServiceImpl implements PaisService {
                 .anyMatch(x -> x.getId().equals(id)) ?
                 index.get() - 1 : -1;
     }
+@Override
+public Pais getEntityById(Long id) {
+    Pais pais = getPaisById(id);
+    if (pais == null) {
+        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+    return pais;
+}
+
 
 }
