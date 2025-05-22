@@ -13,7 +13,6 @@ import java.util.List;
 @CrossOrigin()
 @RestController()
 @RequestMapping("/ponto-turistico")
-// @RequestMapping("/ponto-turistico")  
 public class PontoTuristicoController {
     private final PontoTuristicoService PontoTuristicoService;
 
