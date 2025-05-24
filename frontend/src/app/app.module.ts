@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common';
+import { PoPageModule } from '@po-ui/ng-components';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +15,8 @@ import { ComentariosComponent } from './comentarios/comentarios.component';
 import { CadastroComentarioComponent } from './comentarios/cadastro-comentario/cadastro-comentario.component';
 import { PoTemplatesModule } from '@po-ui/ng-templates';
 import { ReactiveFormsModule } from '@angular/forms';
+import { PoPageDynamicTableModule } from '@po-ui/ng-templates';
+import { PoModalModule, PoDynamicModule } from '@po-ui/ng-components';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { ReactiveFormsModule } from '@angular/forms';
     PontosTuristicosComponent,
     CadastroPontosTuristicosComponent,
     ComentariosComponent,
-    CadastroComentarioComponent
+    CadastroComentarioComponent,
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -30,7 +36,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule,
     PoModule,
     RouterModule.forRoot([]),
-    PoTemplatesModule
+    PoTemplatesModule,
+    PoModalModule,
+    PoPageDynamicTableModule,
+    PoDynamicModule,
+    CommonModule,
+    PoPageModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,15 +1,166 @@
-import { Component, OnInit } from '@angular/core';
+
+import { Component, ViewChild } from '@angular/core';
+
+
+import { PoBreadcrumb, PoDynamicViewField, PoModalComponent } from '@po-ui/ng-components';
+import {
+  PoPageDynamicTableActions,
+  PoPageDynamicTableCustomAction,
+  PoPageDynamicTableCustomTableAction
+} from '@po-ui/ng-templates';
 
 @Component({
   selector: 'app-pontos-turisticos',
   templateUrl: './pontos-turisticos.component.html',
-  styleUrls: ['./pontos-turisticos.component.css']
+  styleUrls: ['./pontos-turisticos.component.css'],
+  standalone: false
 })
-export class PontosTuristicosComponent implements OnInit {
+export class PontosTuristicosComponent {
+  @ViewChild('DetailModal') DetailModal!: PoModalComponent;
 
-  constructor() { }
+  readonly serviceApi = 'https://po-sample-api.onrender.com/v1/hotels';
 
-  ngOnInit(): void {
+  actionsRight = true;
+  detailed: any;
+  quickSearchWidth: number = 3;
+  hideRemoveAllDisclaimer = false;
+  hideCloseDisclaimers: Array<string> = ['address_city'];
+
+  readonly actions: PoPageDynamicTableActions = {
+    new: '/documentation/po-page-dynamic-edit',
+    remove: true,
+    removeAll: true
+  };
+
+  readonly breadcrumb: PoBreadcrumb = {
+    items: [{ label: 'Home', link: '/' }, { label: 'Ponto Turístico' }]
+  };
+
+  readonly cityOptions: Array<object> = [
+    { value: 'São Paulo', label: 'São Paulo' },
+    { value: 'Uberaba', label: 'Uberaba' },
+    { value: 'São benedito', label: 'São benedito' },
+    { value: 'Belford Roxo', label: 'Belford Roxo' },
+    { value: 'Vila Velha', label: 'Vila Velha' },
+    { value: 'Mogi das Cruzes', label: 'Mogi das Cruzes' },
+    { value: 'Minas Gerais', label: 'Minas Gerais' }
+  ];
+
+  readonly categoryOptions: Array<object> = [
+    { value: 'Simples', label: 'Simples' },
+    { value: 'Luxo', label: 'Luxo' }
+  ];
+
+  readonly fields: Array<any> = [
+    { property: 'id', key: true, visible: false },
+    { property: 'name', label: 'Name', width: '115px', filter: true, gridColumns: 6 },
+    {
+      property: 'floors',
+      label: 'Floors',
+      filter: true,
+      gridColumns: 6,
+      initValue: 10
+    },
+    {
+      property: 'category',
+      label: 'Category',
+      filter: true,
+      options: this.categoryOptions,
+      initValue: 'Luxo',
+      gridColumns: 6
+    },
+    {
+      property: 'address_city',
+      label: 'City',
+      filter: true,
+      options: this.cityOptions,
+      gridColumns: 12,
+      initValue: 'Mogi das Cruzes'
+    }
+  ];
+
+  readonly detailFields: Array<PoDynamicViewField> = [
+    { property: 'name', gridLgColumns: 4, divider: 'Info' },
+    { property: 'category', tag: true, gridLgColumns: 4 },
+    { property: 'floors', gridLgColumns: 4 },
+    { property: 'cnpj', label: 'CNPJ', gridLgColumns: 4 },
+    { property: 'address_street', label: 'Street', divider: 'Address' },
+    { property: 'address_number', label: 'Number' },
+    { property: 'address_zip', label: 'Zip Code' },
+    { property: 'address_city', label: 'City' },
+    { property: 'address_district', label: 'District' },
+    { property: 'email', label: 'email', gridLgColumns: 6, divider: 'Contact' },
+    { property: 'phone', gridLgColumns: 4 }
+  ];
+
+  pageCustomActions: Array<PoPageDynamicTableCustomAction> = [
+    {
+      label: 'Hide Remove All Disclaimer',
+      action: this.onClickRemoveAllDisclaimer.bind(this),
+      visible: this.isVisibleRemoveAllDisclaimer.bind(this),
+      icon: 'an an-eye-closed'
+    },
+    {
+      label: 'Show Remove All Disclaimer',
+      action: this.onClickRemoveAllDisclaimer.bind(this),
+      visible: this.isHideRemoveAllDisclaimer.bind(this),
+      icon: 'an an-eye'
+    },
+    {
+      label: 'Hide Close City Disclaimer',
+      action: this.onClickCloseCityDisclaimer.bind(this),
+      visible: this.isVisibleCloseCityDisclaimer.bind(this),
+      icon: 'an an-eye-closed'
+    },
+    {
+      label: 'Show Close City Disclaimer',
+      action: this.onClickCloseCityDisclaimer.bind(this),
+      visible: this.isHideCloseCityDisclaimer.bind(this),
+      icon: 'an an-eye'
+    }
+  ];
+
+  tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [
+    {
+      label: 'Details',
+      action: this.onClickDetail.bind(this),
+      icon: 'an an-user'
+    }
+  ];
+
+  constructor() {}
+
+  private onClickDetail(ponto: any) {
+    this.detailed = ponto;
+
+    this.DetailModal.open();
   }
 
+  private onClickRemoveAllDisclaimer() {
+    this.hideRemoveAllDisclaimer = !this.hideRemoveAllDisclaimer;
+  }
+
+  private isVisibleRemoveAllDisclaimer() {
+    return !this.hideRemoveAllDisclaimer;
+  }
+
+  private isHideRemoveAllDisclaimer() {
+    return this.hideRemoveAllDisclaimer;
+  }
+
+  private onClickCloseCityDisclaimer() {
+    if (this.hideCloseDisclaimers.length > 0) {
+      this.hideCloseDisclaimers = [];
+    } else {
+      this.hideCloseDisclaimers = ['address_city'];
+    }
+  }
+
+  private isVisibleCloseCityDisclaimer() {
+    return this.hideCloseDisclaimers.length <= 0;
+  }
+
+  private isHideCloseCityDisclaimer() {
+    return this.hideCloseDisclaimers.length > 0;
+  }
 }

@@ -5,6 +5,8 @@ import { CadastroPaisesComponent } from './paises/cadastro-paises/cadastro-paise
 import { PaisesComponent } from './paises/paises.component';
 import { CadastroPontosTuristicosComponent } from './pontos-turisticos/cadastro-pontos-turisticos/cadastro-pontos-turisticos.component';
 import { PontosTuristicosComponent } from './pontos-turisticos/pontos-turisticos.component';
+import { PoPageDynamicTableModule } from '@po-ui/ng-templates';
+import { PoPageDynamicTableComponent } from '@po-ui/ng-templates';
 
 const routes: Routes = [
   {
@@ -79,9 +81,19 @@ const routes: Routes = [
     ]
   },
   {
-    path: "**",
-    redirectTo: "pais"
+    path: 'sample-po-page-dynamic-table-hotels',
+    component: PoPageDynamicTableComponent
+  },
+  {
+  path: 'people',
+  component: PoPageDynamicTableComponent,
+  data: {
+    serviceApi: 'http://localhost:3000/v1/people', // endpoint dos dados
+    serviceMetadataApi: 'http://localhost:3000/v1/metadata', // endpoint dos metadados utilizando o método HTTP Get
+    serviceLoadApi: 'http://localhost:3000/load-metadata' // endpoint de customizações dos metadados utilizando o método HTTP Post
   }
+ },
+ 
 ];
 
 @NgModule({
