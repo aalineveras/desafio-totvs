@@ -1,12 +1,13 @@
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 
 import { PoBreadcrumb, PoDynamicViewField, PoModalComponent } from '@po-ui/ng-components';
 import {
   PoPageDynamicTableActions,
   PoPageDynamicTableCustomAction,
-  PoPageDynamicTableCustomTableAction
+  PoPageDynamicTableCustomTableAction,
+  PoPageDynamicTableOptions,
 } from '@po-ui/ng-templates';
 
 @Component({
@@ -15,109 +16,271 @@ import {
   styleUrls: ['./pontos-turisticos.component.css'],
   standalone: false
 })
+
 export class PontosTuristicosComponent {
   @ViewChild('DetailModal') DetailModal!: PoModalComponent;
 
-  readonly serviceApi = 'https://po-sample-api.onrender.com/v1/hotels';
+  readonly serviceApi = 'http://localhost:8080/ponto-turistico';
 
   actionsRight = true;
   detailed: any;
   quickSearchWidth: number = 3;
-  hideRemoveAllDisclaimer = false;
-  hideCloseDisclaimers: Array<string> = ['address_city'];
 
   readonly actions: PoPageDynamicTableActions = {
-    new: '/documentation/po-page-dynamic-edit',
+    new: './ponto-turistico/cadastro',
     remove: true,
     removeAll: true
   };
+
 
   readonly breadcrumb: PoBreadcrumb = {
     items: [{ label: 'Home', link: '/' }, { label: 'Ponto Turístico' }]
   };
 
-  readonly cityOptions: Array<object> = [
-    { value: 'São Paulo', label: 'São Paulo' },
-    { value: 'Uberaba', label: 'Uberaba' },
-    { value: 'São benedito', label: 'São benedito' },
-    { value: 'Belford Roxo', label: 'Belford Roxo' },
-    { value: 'Vila Velha', label: 'Vila Velha' },
-    { value: 'Mogi das Cruzes', label: 'Mogi das Cruzes' },
-    { value: 'Minas Gerais', label: 'Minas Gerais' }
+  readonly paisOptions: Array<object> = [
+    {
+      "value": "Afeganistão",
+      "label": "Afeganistão"
+    },
+    {
+      "value": "África do Sul",
+      "label": "África do Sul"
+    },
+    {
+      "value": "Albânia",
+      "label": "Albânia"
+    },
+    {
+      "value": "Alemanha",
+      "label": "Alemanha"
+    },
+    {
+      "value": "Andorra",
+      "label": "Andorra"
+    },
+    {
+      "value": "Angola",
+      "label": "Angola"
+    },
+    {
+      "value": "Arábia Saudita",
+      "label": "Arábia Saudita"
+    },
+    {
+      "value": "Argentina",
+      "label": "Argentina"
+    },
+    {
+      "value": "Armênia",
+      "label": "Armênia"
+    },
+    {
+      "value": "Austrália",
+      "label": "Austrália"
+    },
+    {
+      "value": "Áustria",
+      "label": "Áustria"
+    },
+    {
+      "value": "Bahamas",
+      "label": "Bahamas"
+    },
+    {
+      "value": "Bangladesh",
+      "label": "Bangladesh"
+    },
+    {
+      "value": "Barbados",
+      "label": "Barbados"
+    },
+    {
+      "value": "Bélgica",
+      "label": "Bélgica"
+    },
+    {
+      "value": "Bolívia",
+      "label": "Bolívia"
+    },
+    {
+      "value": "Brasil",
+      "label": "Brasil"
+    },
+    {
+      "value": "Canadá",
+      "label": "Canadá"
+    },
+    {
+      "value": "Chile",
+      "label": "Chile"
+    },
+    {
+      "value": "China",
+      "label": "China"
+    },
+    {
+      "value": "Colômbia",
+      "label": "Colômbia"
+    },
+    {
+      "value": "Coreia do Sul",
+      "label": "Coreia do Sul"
+    },
+    {
+      "value": "Cuba",
+      "label": "Cuba"
+    },
+    {
+      "value": "Dinamarca",
+      "label": "Dinamarca"
+    },
+    {
+      "value": "Egito",
+      "label": "Egito"
+    },
+    {
+      "value": "Equador",
+      "label": "Equador"
+    },
+    {
+      "value": "Espanha",
+      "label": "Espanha"
+    },
+    {
+      "value": "Estados Unidos",
+      "label": "Estados Unidos"
+    },
+    {
+      "value": "França",
+      "label": "França"
+    },
+    {
+      "value": "Grécia",
+      "label": "Grécia"
+    },
+    {
+      "value": "Índia",
+      "label": "Índia"
+    },
+    {
+      "value": "Indonésia",
+      "label": "Indonésia"
+    },
+    {
+      "value": "Irã",
+      "label": "Irã"
+    },
+    {
+      "value": "Irlanda",
+      "label": "Irlanda"
+    },
+    {
+      "value": "Israel",
+      "label": "Israel"
+    },
+    {
+      "value": "Itália",
+      "label": "Itália"
+    },
+    {
+      "value": "Japão",
+      "label": "Japão"
+    },
+    {
+      "value": "México",
+      "label": "México"
+    },
+    {
+      "value": "Nigéria",
+      "label": "Nigéria"
+    },
+    {
+      "value": "Noruega",
+      "label": "Noruega"
+    },
+    {
+      "value": "Nova Zelândia",
+      "label": "Nova Zelândia"
+    },
+    {
+      "value": "Países Baixos",
+      "label": "Países Baixos"
+    },
+    {
+      "value": "Paraguai",
+      "label": "Paraguai"
+    },
+    {
+      "value": "Peru",
+      "label": "Peru"
+    },
+    {
+      "value": "Portugal",
+      "label": "Portugal"
+    },
+    {
+      "value": "Reino Unido",
+      "label": "Reino Unido"
+    },
+    {
+      "value": "Rússia",
+      "label": "Rússia"
+    },
+    {
+      "value": "Suécia",
+      "label": "Suécia"
+    },
+    {
+      "value": "Suíça",
+      "label": "Suíça"
+    },
+    {
+      "value": "Ucrânia",
+      "label": "Ucrânia"
+    },
+    {
+      "value": "Uruguai",
+      "label": "Uruguai"
+    },
+    {
+      "value": "Venezuela",
+      "label": "Venezuela"
+    }
   ];
 
-  readonly categoryOptions: Array<object> = [
-    { value: 'Simples', label: 'Simples' },
-    { value: 'Luxo', label: 'Luxo' }
+  readonly estacaoOptions: Array<object> = [
+    {
+      "value": "Primavera",
+      "label": "Primavera"
+    },
+    {
+      "value": "Verão",
+      "label": "Verão"
+    },
+    {
+      "value": "Outono",
+      "label": "Outono"
+    },
+    {
+      "value": "Inverno",
+      "label": "Inverno"
+    },
   ];
 
   readonly fields: Array<any> = [
-    { property: 'id', key: true, visible: false },
-    { property: 'name', label: 'Name', width: '115px', filter: true, gridColumns: 6 },
-    {
-      property: 'floors',
-      label: 'Floors',
-      filter: true,
-      gridColumns: 6,
-      initValue: 10
-    },
-    {
-      property: 'category',
-      label: 'Category',
-      filter: true,
-      options: this.categoryOptions,
-      initValue: 'Luxo',
-      gridColumns: 6
-    },
-    {
-      property: 'address_city',
-      label: 'City',
-      filter: true,
-      options: this.cityOptions,
-      gridColumns: 12,
-      initValue: 'Mogi das Cruzes'
-    }
+    { property: 'nome', label: 'Ponto Turístico', filter: true, gridColumns: 6 },
+    { property: 'pais', label: 'País', filter: true, options: this.paisOptions, gridColumns: 6 },
+    { property: 'cidade', label: 'Cidade', filter: true, gridColumns: 6 },
+    { property: 'estacao', label: 'Estação', filter: true, options: this.estacaoOptions, gridColumns: 6 },
+    { property: 'resumo', label: 'Resumo', gridColumns: 12 }
   ];
 
   readonly detailFields: Array<PoDynamicViewField> = [
-    { property: 'name', gridLgColumns: 4, divider: 'Info' },
-    { property: 'category', tag: true, gridLgColumns: 4 },
-    { property: 'floors', gridLgColumns: 4 },
-    { property: 'cnpj', label: 'CNPJ', gridLgColumns: 4 },
-    { property: 'address_street', label: 'Street', divider: 'Address' },
-    { property: 'address_number', label: 'Number' },
-    { property: 'address_zip', label: 'Zip Code' },
-    { property: 'address_city', label: 'City' },
-    { property: 'address_district', label: 'District' },
-    { property: 'email', label: 'email', gridLgColumns: 6, divider: 'Contact' },
-    { property: 'phone', gridLgColumns: 4 }
-  ];
-
-  pageCustomActions: Array<PoPageDynamicTableCustomAction> = [
-    {
-      label: 'Hide Remove All Disclaimer',
-      action: this.onClickRemoveAllDisclaimer.bind(this),
-      visible: this.isVisibleRemoveAllDisclaimer.bind(this),
-      icon: 'an an-eye-closed'
-    },
-    {
-      label: 'Show Remove All Disclaimer',
-      action: this.onClickRemoveAllDisclaimer.bind(this),
-      visible: this.isHideRemoveAllDisclaimer.bind(this),
-      icon: 'an an-eye'
-    },
-    {
-      label: 'Hide Close City Disclaimer',
-      action: this.onClickCloseCityDisclaimer.bind(this),
-      visible: this.isVisibleCloseCityDisclaimer.bind(this),
-      icon: 'an an-eye-closed'
-    },
-    {
-      label: 'Show Close City Disclaimer',
-      action: this.onClickCloseCityDisclaimer.bind(this),
-      visible: this.isHideCloseCityDisclaimer.bind(this),
-      icon: 'an an-eye'
-    }
+    { property: 'nome', label: "Ponto Turístico", gridLgColumns: 12, divider: 'Detalhes' },
+    { property: 'pais', label: "País", gridLgColumns: 6 },
+    { property: 'cidade', label: "Cidade", gridLgColumns: 6 },
+    { property: 'estacao', label: "Melhor estação do ano", tag: true, gridLgColumns: 4 },
+    { property: 'resumo', label: "Resumo", gridLgColumns: 8 }
   ];
 
   tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [
@@ -128,7 +291,7 @@ export class PontosTuristicosComponent {
     }
   ];
 
-  constructor() {}
+  constructor() { }
 
   private onClickDetail(ponto: any) {
     this.detailed = ponto;
@@ -136,31 +299,4 @@ export class PontosTuristicosComponent {
     this.DetailModal.open();
   }
 
-  private onClickRemoveAllDisclaimer() {
-    this.hideRemoveAllDisclaimer = !this.hideRemoveAllDisclaimer;
-  }
-
-  private isVisibleRemoveAllDisclaimer() {
-    return !this.hideRemoveAllDisclaimer;
-  }
-
-  private isHideRemoveAllDisclaimer() {
-    return this.hideRemoveAllDisclaimer;
-  }
-
-  private onClickCloseCityDisclaimer() {
-    if (this.hideCloseDisclaimers.length > 0) {
-      this.hideCloseDisclaimers = [];
-    } else {
-      this.hideCloseDisclaimers = ['address_city'];
-    }
-  }
-
-  private isVisibleCloseCityDisclaimer() {
-    return this.hideCloseDisclaimers.length <= 0;
-  }
-
-  private isHideCloseCityDisclaimer() {
-    return this.hideCloseDisclaimers.length > 0;
-  }
 }

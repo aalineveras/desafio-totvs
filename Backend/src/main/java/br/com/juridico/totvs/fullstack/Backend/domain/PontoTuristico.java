@@ -1,23 +1,29 @@
 package br.com.juridico.totvs.fullstack.Backend.domain;
 
+import javax.persistence.*;
+
+@Entity
 public class PontoTuristico {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String nome;
+    private String pais;
     private String cidade;
-    private String melhorEstacao;
+    private String estacao;
     private String resumo;
-    private Pais pais;
 
     public PontoTuristico() {}
 
-    public PontoTuristico(Long id, String nome, String cidade, String melhorEstacao, String resumo, Pais pais) {
+    public PontoTuristico(Long id, String nome, String pais, String cidade, String estacao, String resumo) {
         this.id = id;
         this.nome = nome;
-        this.cidade = cidade;
-        this.melhorEstacao = melhorEstacao;
-        this.resumo = resumo;
         this.pais = pais;
+        this.cidade = cidade;
+        this.estacao = estacao;
+        this.resumo = resumo;
     }
 
     public Long getId() {
@@ -36,6 +42,14 @@ public class PontoTuristico {
         this.nome = nome;
     }
 
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
     public String getCidade() {
         return cidade;
     }
@@ -44,12 +58,12 @@ public class PontoTuristico {
         this.cidade = cidade;
     }
 
-    public String getMelhorEstacao() {
-        return melhorEstacao;
+    public String getEstacao() {
+        return estacao;
     }
 
-    public void setMelhorEstacao(String melhorEstacao) {
-        this.melhorEstacao = melhorEstacao;
+    public void setEstacao(String estacao) {
+        this.estacao = estacao;
     }
 
     public String getResumo() {
@@ -58,13 +72,5 @@ public class PontoTuristico {
 
     public void setResumo(String resumo) {
         this.resumo = resumo;
-    }
-
-    public Pais getPais() {
-        return pais;
-    }
-
-    public void setPais(Pais pais) {
-        this.pais = pais;
     }
 }

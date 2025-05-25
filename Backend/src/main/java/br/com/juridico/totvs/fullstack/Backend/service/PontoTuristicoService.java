@@ -1,14 +1,17 @@
 package br.com.juridico.totvs.fullstack.Backend.service;
 
-import br.com.juridico.totvs.fullstack.Backend.service.dto.PontoTuristicoCreateUpdateDTO;
-import br.com.juridico.totvs.fullstack.Backend.service.dto.PontoTuristicoDTO;
+import br.com.juridico.totvs.fullstack.Backend.domain.PontoTuristico;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface PontoTuristicoService {
-    PontoTuristicoDTO create(PontoTuristicoCreateUpdateDTO dto);
-    List<PontoTuristicoDTO> getAll();
-    PontoTuristicoDTO getById(Long id);
-    PontoTuristicoDTO update(Long id, PontoTuristicoCreateUpdateDTO dto);
-    void delete(Long id);
+
+    List<PontoTuristico> listarTodos();
+
+    Optional<PontoTuristico> buscarPorId(Long id);
+
+    PontoTuristico salvar(PontoTuristico ponto);
+
+    void excluir(Long id);
 }

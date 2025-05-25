@@ -1,14 +1,12 @@
-<po-page-default p-title="Cadastro de Pontos Turísticos">
-    <po-page-dynamic-table [p-auto-router]="true" [p-concat-filters]="true" [p-keep-filters]="true" p-title="Pontos Turísticos"
-        [p-actions]="actions" [p-actions-right]="actionsRight" [p-page-custom-actions]="pageCustomActions"
+<po-page-default>
+    <po-page-dynamic-table [p-auto-router]="true" [p-concat-filters]="true" [p-keep-filters]="true"
+        p-title="Pontos Turísticos" [p-actions]="actions" [p-actions-right]="actionsRight"
         [p-table-custom-actions]="tableCustomActions" [p-breadcrumb]="breadcrumb" [p-fields]="fields"
-        [p-service-api]="serviceApi" [p-quick-search-width]="quickSearchWidth"
-        [p-hide-remove-all-disclaimer]="hideRemoveAllDisclaimer" [p-hide-close-disclaimers]="hideCloseDisclaimers"
-
-        >
+        [p-service-api]="serviceApi" [p-quick-search-width]="quickSearchWidth">
     </po-page-dynamic-table>
 
     <po-modal #DetailModal p-title="Detalhes do Ponto Turistíco">
         <po-dynamic-view [p-fields]="detailFields" [p-value]="detailed"> </po-dynamic-view>
+        <po-button p-label="Close" (p-click)="DetailModal.close()"> </po-button>
     </po-modal>
 </po-page-default>
