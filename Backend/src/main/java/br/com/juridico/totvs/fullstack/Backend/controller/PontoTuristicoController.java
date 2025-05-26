@@ -21,13 +21,17 @@ public class PontoTuristicoController {
         this.service = service;
     }
 
-    // ✅ Listagem compatível com po-page-dynamic-table (com paginação)
+    // ✅ Listagem compatível com po-page-dynamic-table (com paginação e ordenação por ID desc)
     @GetMapping
-    public Map<String, Object> listarComPaginacao(
+    public Map<String, Object> listarComFiltros(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int pageSize) {
+            @RequestParam(defaultValue = "10") int pageSize,
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) String pais,
+            @RequestParam(required = false) String cidade,
+            @RequestParam(required = false) String estacao) {
 
-        List<PontoTuristico> todos = service.listarTodos();
+        List<PontoTuristico> todos = service.buscarComFiltros(search, pais, cidade, estacao);
 
         int fromIndex = (page - 1) * pageSize;
         int toIndex = Math.min(fromIndex + pageSize, todos.size());

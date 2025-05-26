@@ -14,4 +14,9 @@ public interface PontoTuristicoService {
     PontoTuristico salvar(PontoTuristico ponto);
 
     void excluir(Long id);
+
+    List<PontoTuristico> buscarPorTermo(String termo);
+
+    List<PontoTuristico> buscarComFiltros(String search, String pais, String cidade, String estacao);
 }
+

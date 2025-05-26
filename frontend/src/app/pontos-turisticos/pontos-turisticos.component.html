@@ -2,10 +2,19 @@
     <po-page-dynamic-table [p-auto-router]="true" [p-concat-filters]="true" [p-keep-filters]="true"
         p-title="Pontos Turísticos" [p-actions]="actions" [p-actions-right]="actionsRight"
         [p-table-custom-actions]="tableCustomActions" [p-breadcrumb]="breadcrumb" [p-fields]="fields"
-        [p-service-api]="serviceApi" [p-quick-search-width]="quickSearchWidth"  [p-actions]="actions">
+        [p-service-api]="'http://localhost:8080/ponto-turistico'" [p-quick-search-width]="quickSearchWidth" [p-actions]="actions"  [p-quick-search-width]="quickSearchWidth">
     </po-page-dynamic-table>
 
     <po-modal #DetailModal p-title="Detalhes do Ponto Turistíco">
         <po-dynamic-view [p-fields]="detailFields" [p-value]="detailed"> </po-dynamic-view>
+        <form #optionsForm="ngForm">
+            <div class="po-row">
+                <po-textarea class="po-md-12" name="comentarioDetail" [(ngModel)]="comentarioDetail" p-label="Comentário:"
+                    [p-rows] ="8">
+                </po-textarea>
+
+                <po-button p-kind="primary" p-label="Publicar" (p-click)="confirmComentario()"> </po-button>
+            </div>
+        </form>
     </po-modal>
 </po-page-default>
