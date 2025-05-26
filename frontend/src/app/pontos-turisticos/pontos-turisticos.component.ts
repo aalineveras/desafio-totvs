@@ -1,30 +1,33 @@
-
 import { Component, OnInit, ViewChild } from '@angular/core';
-
-
+import { PontoTuristicoService, PontoTuristico } from '../service/ponto-turistico.service';
 import { PoBreadcrumb, PoDynamicViewField, PoModalComponent } from '@po-ui/ng-components';
 import {
   PoPageDynamicTableActions,
-  PoPageDynamicTableCustomAction,
-  PoPageDynamicTableCustomTableAction,
-  PoPageDynamicTableOptions,
+  PoPageDynamicTableCustomTableAction
 } from '@po-ui/ng-templates';
 
 @Component({
   selector: 'app-pontos-turisticos',
   templateUrl: './pontos-turisticos.component.html',
-  styleUrls: ['./pontos-turisticos.component.css'],
-  standalone: false
+  styleUrls: ['./pontos-turisticos.component.css']
 })
-
-export class PontosTuristicosComponent {
+export class PontosTuristicosComponent implements OnInit {
   @ViewChild('DetailModal') DetailModal!: PoModalComponent;
 
-  readonly serviceApi = 'http://localhost:8080/ponto-turistico';
-
-  actionsRight = true;
+  pontos: PontoTuristico[] = [];
   detailed: any;
-  quickSearchWidth: number = 3;
+  quickSearchWidth = 3;
+  actionsRight = true;
+
+  readonly serviceApi = 'http://localhost:8080/ponto-turistico?page=1&pageSize=10';
+
+  constructor(private service: PontoTuristicoService) {}
+
+  ngOnInit(): void {
+    this.service.getAll().subscribe(dados => {
+      this.pontos = dados;
+    });
+  }
 
   readonly actions: PoPageDynamicTableActions = {
     new: './ponto-turistico/cadastro',
@@ -32,13 +35,15 @@ export class PontosTuristicosComponent {
     removeAll: true
   };
 
-
   readonly breadcrumb: PoBreadcrumb = {
-    items: [{ label: 'Home', link: '/' }, { label: 'Ponto Turístico' }]
+    items: [
+      { label: 'Home', link: '/' },
+      { label: 'Ponto Turístico' }
+    ]
   };
 
-  readonly paisOptions: Array<object> = [
-    {
+  readonly paisOptions = [
+     {
       "value": "Afeganistão",
       "label": "Afeganistão"
     },
@@ -267,7 +272,7 @@ export class PontosTuristicosComponent {
     },
   ];
 
-  readonly fields: Array<any> = [
+  readonly fields = [
     { property: 'nome', label: 'Ponto Turístico', filter: true, gridColumns: 6 },
     { property: 'pais', label: 'País', filter: true, options: this.paisOptions, gridColumns: 6 },
     { property: 'cidade', label: 'Cidade', filter: true, gridColumns: 6 },
@@ -276,27 +281,23 @@ export class PontosTuristicosComponent {
   ];
 
   readonly detailFields: Array<PoDynamicViewField> = [
-    { property: 'nome', label: "Ponto Turístico", gridLgColumns: 12, divider: 'Detalhes' },
-    { property: 'pais', label: "País", gridLgColumns: 6 },
-    { property: 'cidade', label: "Cidade", gridLgColumns: 6 },
-    { property: 'estacao', label: "Melhor estação do ano", tag: true, gridLgColumns: 4 },
-    { property: 'resumo', label: "Resumo", gridLgColumns: 8 }
+    { property: 'nome', label: 'Ponto Turístico', gridLgColumns: 12, divider: 'Detalhes' },
+    { property: 'pais', label: 'País', gridLgColumns: 6 },
+    { property: 'cidade', label: 'Cidade', gridLgColumns: 6 },
+    { property: 'estacao', label: 'Melhor estação do ano', tag: true, gridLgColumns: 4 },
+    { property: 'resumo', label: 'Resumo', gridLgColumns: 8 }
   ];
 
-  tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [
+  readonly tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [
     {
-      label: 'Details',
+      label: 'Detalhar',
       action: this.onClickDetail.bind(this),
-      icon: 'an an-user'
+      icon: 'po-icon-info'
     }
   ];
 
-  constructor() { }
-
-  private onClickDetail(ponto: any) {
+  private onClickDetail(ponto: any): void {
     this.detailed = ponto;
-
     this.DetailModal.open();
   }
-
 }

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import {
   PoModule,
@@ -48,7 +49,8 @@ import { CadastroComentarioComponent } from './comentarios/cadastro-comentario/c
     PoModalModule,
     PoDynamicModule,
     PoTemplatesModule,
-    PoPageDynamicTableModule
+    PoPageDynamicTableModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
