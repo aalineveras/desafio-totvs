@@ -43,7 +43,7 @@ import { CadastroComentarioComponent } from './comentarios/cadastro-comentario/c
     FormsModule,
     ReactiveFormsModule,
     AppRoutingModule,
-    RouterModule, // apenas se precisar usar rotas diretamente aqui
+    RouterModule, 
     PoModule,
     PoPageModule,
     PoModalModule,
