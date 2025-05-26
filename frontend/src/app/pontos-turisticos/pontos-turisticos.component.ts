@@ -19,7 +19,7 @@ export class PontosTuristicosComponent implements OnInit {
   quickSearchWidth = 3;
   actionsRight = true;
 
-  readonly serviceApi = 'http://localhost:8080/ponto-turistico?page=1&pageSize=10';
+  readonly serviceApi = 'http://localhost:8080/ponto-turistico';
 
   constructor(private service: PontoTuristicoService) {}
 

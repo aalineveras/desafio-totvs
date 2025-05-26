@@ -16,7 +16,7 @@ export interface PontoTuristico {
 })
 export class PontoTuristicoService {
 
-  private readonly API = 'http://localhost:8080/pontos-turisticos';
+  private readonly API = 'http://localhost:8080/ponto-turistico';
 
   constructor(private http: HttpClient) {}
 
