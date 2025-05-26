@@ -1,0 +1,212 @@
+[
+  {
+    "nome": "Cristo Redentor",
+    "pais": "Brasil",
+    "cidade": "Rio de Janeiro",
+    "estacao": "Verão",
+    "resumo": "Estátua icônica no topo do Corcovado com vista panorâmica da cidade."
+  },
+  {
+    "nome": "Cataratas do Iguaçu",
+    "pais": "Brasil",
+    "cidade": "Foz do Iguaçu",
+    "estacao": "Primavera",
+    "resumo": "Conjunto de cachoeiras impressionantes na fronteira com a Argentina."
+  },
+  {
+    "nome": "Pão de Açúcar",
+    "pais": "Brasil",
+    "cidade": "Rio de Janeiro",
+    "estacao": "Verão",
+    "resumo": "Montanha com bondinho e vista deslumbrante da Baía de Guanabara."
+  },
+  {
+    "nome": "Pelourinho",
+    "pais": "Brasil",
+    "cidade": "Salvador",
+    "estacao": "Verão",
+    "resumo": "Centro histórico com arquitetura colonial e vida cultural vibrante."
+  },
+  {
+    "nome": "Praia de Copacabana",
+    "pais": "Brasil",
+    "cidade": "Rio de Janeiro",
+    "estacao": "Verão",
+    "resumo": "Praia urbana famosa por seu calçadão e eventos."
+  },
+  {
+    "nome": "Chapada Diamantina",
+    "pais": "Brasil",
+    "cidade": "Lençóis",
+    "estacao": "Outono",
+    "resumo": "Parque nacional com cachoeiras, grutas e trilhas ecológicas."
+  },
+  {
+    "nome": "Lençóis Maranhenses",
+    "pais": "Brasil",
+    "cidade": "Barreirinhas",
+    "estacao": "Inverno",
+    "resumo": "Paisagem única de dunas brancas e lagoas de água doce."
+  },
+  {
+    "nome": "Jalapão",
+    "pais": "Brasil",
+    "cidade": "Mateiros",
+    "estacao": "Primavera",
+    "resumo": "Região com fervedouros, dunas e paisagens naturais preservadas."
+  },
+  {
+    "nome": "Centro Histórico de Ouro Preto",
+    "pais": "Brasil",
+    "cidade": "Ouro Preto",
+    "estacao": "Inverno",
+    "resumo": "Cidade colonial preservada com igrejas barrocas e museus."
+  },
+  {
+    "nome": "Teatro Amazonas",
+    "pais": "Brasil",
+    "cidade": "Manaus",
+    "estacao": "Outono",
+    "resumo": "Teatro histórico símbolo do Ciclo da Borracha, no coração da Amazônia."
+  },
+  {
+    "nome": "Torre Eiffel",
+    "pais": "França",
+    "cidade": "Paris",
+    "estacao": "Primavera",
+    "resumo": "Marco histórico e símbolo da França."
+  },
+  {
+    "nome": "Coliseu",
+    "pais": "Itália",
+    "cidade": "Roma",
+    "estacao": "Outono",
+    "resumo": "Antigo anfiteatro romano."
+  },
+  {
+    "nome": "Estátua da Liberdade",
+    "pais": "Estados Unidos",
+    "cidade": "Nova York",
+    "estacao": "Outono",
+    "resumo": "Símbolo de liberdade e democracia americana."
+  },
+  {
+    "nome": "Muralha da China",
+    "pais": "China",
+    "cidade": "Pequim",
+    "estacao": "Outono",
+    "resumo": "Fortificação milenar visível do espaço."
+  },
+  {
+    "nome": "Machu Picchu",
+    "pais": "Peru",
+    "cidade": "Cusco",
+    "estacao": "Inverno",
+    "resumo": "Ruínas incas nas montanhas peruanas."
+  },
+  {
+    "nome": "Big Ben",
+    "pais": "Reino Unido",
+    "cidade": "Londres",
+    "estacao": "Primavera",
+    "resumo": "Relógio famoso às margens do Tâmisa."
+  },
+  {
+    "nome": "Sagrada Família",
+    "pais": "Espanha",
+    "cidade": "Barcelona",
+    "estacao": "Verão",
+    "resumo": "Catedral monumental projetada por Gaudí."
+  },
+  {
+    "nome": "Ópera de Sydney",
+    "pais": "Austrália",
+    "cidade": "Sydney",
+    "estacao": "Verão",
+    "resumo": "Ícone arquitetônico à beira-mar."
+  },
+  {
+    "nome": "Petra",
+    "pais": "Jordânia",
+    "cidade": "Ma'an",
+    "estacao": "Primavera",
+    "resumo": "Cidade arqueológica esculpida em pedra."
+  },
+  {
+    "nome": "Templo de Karnak",
+    "pais": "Egito",
+    "cidade": "Luxor",
+    "estacao": "Outono",
+    "resumo": "Complexo de templos antigos dedicados aos deuses egípcios."
+  },
+  {
+    "nome": "Taj Mahal",
+    "pais": "Índia",
+    "cidade": "Agra",
+    "estacao": "Inverno",
+    "resumo": "Mausoléu de mármore branco símbolo do amor eterno."
+  },
+  {
+    "nome": "Chichén Itzá",
+    "pais": "México",
+    "cidade": "Yucatán",
+    "estacao": "Inverno",
+    "resumo": "Ruínas maias com a famosa pirâmide de Kukulcán."
+  },
+  {
+    "nome": "Monte Fuji",
+    "pais": "Japão",
+    "cidade": "Honshu",
+    "estacao": "Primavera",
+    "resumo": "Montanha sagrada e cartão-postal do Japão."
+  },
+  {
+    "nome": "Stonehenge",
+    "pais": "Reino Unido",
+    "cidade": "Amesbury",
+    "estacao": "Verão",
+    "resumo": "Círculo de pedras pré-históricas de origem misteriosa."
+  },
+  {
+    "nome": "Burj Khalifa",
+    "pais": "Emirados Árabes Unidos",
+    "cidade": "Dubai",
+    "estacao": "Inverno",
+    "resumo": "Arranha-céu mais alto do mundo com 828 metros."
+  },
+  {
+    "nome": "Plaza Mayor",
+    "pais": "Espanha",
+    "cidade": "Madri",
+    "estacao": "Verão",
+    "resumo": "Praça histórica no coração da capital espanhola."
+  },
+  {
+    "nome": "Angkor Wat",
+    "pais": "Camboja",
+    "cidade": "Siem Reap",
+    "estacao": "Outono",
+    "resumo": "Maior complexo religioso do mundo construído pelos Khmers."
+  },
+  {
+    "nome": "Mont Saint-Michel",
+    "pais": "França",
+    "cidade": "Normandia",
+    "estacao": "Primavera",
+    "resumo": "Ilha rochosa com abadia medieval rodeada por maré."
+  },
+  {
+    "nome": "Catedral de São Basílio",
+    "pais": "Rússia",
+    "cidade": "Moscou",
+    "estacao": "Inverno",
+    "resumo": "Catedral com cúpulas coloridas na Praça Vermelha."
+  },
+  {
+    "nome": "Banff National Park",
+    "pais": "Canadá",
+    "cidade": "Alberta",
+    "estacao": "Verão",
+    "resumo": "Parque nacional com lagos e montanhas nas Rochosas Canadenses."
+  }
+]
