@@ -18,7 +18,7 @@ export class PontoTuristicoService {
 
   private readonly API = 'http://localhost:8080/ponto-turistico';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getAll(): Observable<PontoTuristico[]> {
     return this.http.get<PontoTuristico[]>(this.API);
@@ -27,6 +27,11 @@ export class PontoTuristicoService {
   create(ponto: PontoTuristico): Observable<PontoTuristico> {
     return this.http.post<PontoTuristico>(this.API, ponto);
   }
+  obterPorPonto(pontoId: number): Observable<any[]> {
+    return this.http.get<any[]>(`http://localhost:8080/comentarios/ponto/${pontoId}`);
+  }
 
-  // Outros métodos como update e delete podem ser adicionados depois
+  criar(comentario: any): Observable<any> {
+    return this.http.post<any>('http://localhost:8080/comentarios', comentario);
+  }
 }

@@ -1,6 +1,7 @@
 package br.com.juridico.totvs.fullstack.Backend.domain;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class PontoTuristico {
@@ -15,6 +16,9 @@ public class PontoTuristico {
     private String estacao;
     private String resumo;
 
+    @OneToMany(mappedBy = "pontoTuristico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Comentario> comentarios;
+
     public PontoTuristico() {}
 
     public PontoTuristico(Long id, String nome, String pais, String cidade, String estacao, String resumo) {
@@ -25,6 +29,8 @@ public class PontoTuristico {
         this.estacao = estacao;
         this.resumo = resumo;
     }
+
+    // Getters e Setters
 
     public Long getId() {
         return id;
@@ -72,5 +78,13 @@ public class PontoTuristico {
 
     public void setResumo(String resumo) {
         this.resumo = resumo;
+    }
+
+    public List<Comentario> getComentarios() {
+        return comentarios;
+    }
+
+    public void setComentarios(List<Comentario> comentarios) {
+        this.comentarios = comentarios;
     }
 }

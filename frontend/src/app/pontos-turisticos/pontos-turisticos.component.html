@@ -1,20 +1,82 @@
 <po-page-default>
-    <po-page-dynamic-table [p-auto-router]="true" [p-concat-filters]="true" [p-keep-filters]="true"
-        p-title="Pontos Turísticos" [p-actions]="actions" [p-actions-right]="actionsRight"
-        [p-table-custom-actions]="tableCustomActions" [p-breadcrumb]="breadcrumb" [p-fields]="fields"
-        [p-service-api]="'http://localhost:8080/ponto-turistico'" [p-quick-search-width]="quickSearchWidth" [p-actions]="actions"  [p-quick-search-width]="quickSearchWidth">
-    </po-page-dynamic-table>
+  <po-page-dynamic-table
+    [p-auto-router]="true"
+    [p-concat-filters]="true"
+    [p-keep-filters]="true"
+    p-title="Pontos Turísticos"
+    [p-actions]="actions"
+    [p-actions-right]="actionsRight"
+    [p-table-custom-actions]="tableCustomActions"
+    [p-breadcrumb]="breadcrumb"
+    [p-fields]="fields"
+    [p-service-api]="serviceApi"
+    [p-quick-search-width]="quickSearchWidth">
+  </po-page-dynamic-table>
 
-    <po-modal #DetailModal p-title="Detalhes do Ponto Turistíco">
-        <po-dynamic-view [p-fields]="detailFields" [p-value]="detailed"> </po-dynamic-view>
-        <form #optionsForm="ngForm">
-            <div class="po-row">
-                <po-textarea class="po-md-12" name="comentarioDetail" [(ngModel)]="comentarioDetail" p-label="Comentário:"
-                    [p-rows] ="8">
-                </po-textarea>
+  <po-modal #DetailModal p-title="Detalhes do Ponto Turistíco">
+    <po-dynamic-view [p-fields]="detailFields" [p-value]="detailed"></po-dynamic-view>
 
-                <po-button p-kind="primary" p-label="Publicar" (p-click)="confirmComentario()"> </po-button>
-            </div>
-        </form>
-    </po-modal>
+    <!-- Botão Comentar -->
+    <div class="po-mt-3" *ngIf="!mostrarCaixaComentario">
+      <po-button p-label="Comentar" (p-click)="mostrarCaixaComentario = true"></po-button>
+    </div>
+
+    <!-- Formulário de Comentário -->
+    <form #optionsForm="ngForm" *ngIf="mostrarCaixaComentario">
+      <div class="po-row po-mt-2">
+        <!-- Nome do autor -->
+        <po-input 
+          class="po-md-12"
+          name="autor"
+          [(ngModel)]="novoComentario.autor"
+          p-label="Seu nome:"
+          required
+          #autor="ngModel">
+        </po-input>
+
+        <!-- Comentário -->
+        <po-textarea 
+          class="po-md-12 po-mt-2"
+          name="texto"
+          [(ngModel)]="novoComentario.texto"
+          p-label="Comentário:"
+          [p-rows]="4"
+          required
+          #texto="ngModel">
+        </po-textarea>
+
+        <!-- Botão Publicar (desabilitado se os campos estiverem vazios) -->
+        <div class="po-md-12 po-mt-2">
+          <po-button
+            p-kind="primary"
+            p-label="Publicar"
+            (p-click)="confirmComentario()"
+            [p-disabled]="optionsForm.invalid">
+          </po-button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Lista ou mensagem se não houver comentários -->
+    <div *ngIf="comentarios?.length > 0; else nenhumComentario">
+      <div *ngFor="let c of comentarios" class="po-mb-3">
+        <div class="po-row po-between po-mb-1">
+          <div class="po-col">
+            <strong>{{ c.autor }}</strong>
+          </div>
+          <div class="po-col po-text-caption">
+            {{ c.data | date:'dd/MM/yyyy' }}
+          </div>
+        </div>
+
+        <div class="po-text po-mb-1">{{ c.texto }}</div>
+        <po-divider></po-divider>
+      </div>
+    </div>
+
+    <ng-template #nenhumComentario>
+      <p class="po-mt-3">Seja o primeiro a comentar sobre esse lugar!</p>
+
+    </ng-template>
+  </po-modal>
 </po-page-default>

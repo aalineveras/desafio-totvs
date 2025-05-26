@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
 import { PoBreadcrumb, PoDynamicViewField, PoModalComponent } from '@po-ui/ng-components';
 import {
@@ -19,12 +20,16 @@ export class PontosTuristicosComponent implements OnInit {
   pontos: PontoTuristico[] = [];
   detailed: any;
   comentarioDetail: string = '';
+  comentarios: any[] = [];
+  mostrarCaixaComentario: boolean = false;
+
   actionsRight: any = [];
   quickSearchWidth = 3;
 
   readonly serviceApi = 'http://localhost:8080/ponto-turistico';
+  private readonly urlComentarios = 'http://localhost:8080/comentario';
 
-  constructor(private service: PontoTuristicoService) {}
+  constructor(private service: PontoTuristicoService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.carregarPontos();
@@ -36,21 +41,37 @@ export class PontosTuristicosComponent implements OnInit {
     });
   }
 
-  confirmComentario(): void {
-    console.log('Comentário confirmado:', this.comentarioDetail);
-
-    // Aqui você pode salvar o comentário no backend se quiser
-    // Ex: this.service.salvarComentario(this.detailed.id, this.comentarioDetail).subscribe(...)
-
-    this.comentarioDetail = '';
-    this.DetailModal.close();
-  }
-
-  readonly actions: PoPageDynamicTableActions = {
-    new: './ponto-turistico/cadastro',
-
+  novoComentario = {
+    autor: '',
+    texto: '',
+    pontoTuristicoId: 0,
+    data: new Date()
   };
 
+  confirmComentario(): void {
+    const comentario = {
+      ...this.novoComentario,
+      pontoTuristicoId: this.detailed.id,
+      data: new Date()
+    };
+
+    this.http.post(this.urlComentarios, comentario).subscribe(() => {
+      this.novoComentario.autor = '';
+      this.novoComentario.texto = '';
+      this.mostrarCaixaComentario = false;
+      this.carregarComentarios(this.detailed.id);
+    });
+  }
+
+  carregarComentarios(pontoId: number): void {
+    this.http.get<any[]>(`${this.urlComentarios}/ponto/${pontoId}`)
+      .subscribe(res => this.comentarios = res);
+  }
+
+
+  readonly actions: PoPageDynamicTableActions = {
+    new: './ponto-turistico/cadastro'
+  };
 
   readonly breadcrumb: PoBreadcrumb = {
     items: [
@@ -59,7 +80,7 @@ export class PontosTuristicosComponent implements OnInit {
     ]
   };
 
-    readonly paisOptions: Array<{ value: string, label: string }> = [
+  readonly paisOptions: Array<{ value: string, label: string }> = [
     { value: 'Afeganistão', label: 'Afeganistão' },
     { value: 'África do Sul', label: 'África do Sul' },
     { value: 'Albânia', label: 'Albânia' },
@@ -211,7 +232,6 @@ export class PontosTuristicosComponent implements OnInit {
     { value: 'Zimbábue', label: 'Zimbábue' }
   ];
 
-
   readonly estacaoOptions: Array<object> = [
     { value: 'Primavera', label: 'Primavera' },
     { value: 'Verão', label: 'Verão' },
@@ -229,7 +249,7 @@ export class PontosTuristicosComponent implements OnInit {
   readonly detailFields: Array<PoDynamicViewField> = [
     { property: 'nome', label: 'Ponto Turístico' },
     { property: 'pais', label: 'País' },
-    { property: 'cidade', label: 'Cidade'},
+    { property: 'cidade', label: 'Cidade' },
     { property: 'estacao', label: 'Melhor estação do ano', tag: true },
     { property: 'resumo', label: 'Resumo' },
   ];
@@ -244,6 +264,9 @@ export class PontosTuristicosComponent implements OnInit {
 
   private onClickDetail(ponto: PontoTuristico): void {
     this.detailed = ponto;
+    this.mostrarCaixaComentario = false;
+    this.comentarioDetail = '';
     this.DetailModal.open();
+    this.carregarComentarios(ponto.id);
   }
 }

@@ -4,24 +4,60 @@ import br.com.juridico.totvs.fullstack.Backend.domain.Comentario;
 import java.time.LocalDateTime;
 
 public class ComentarioDTO {
-    private Long id;
+
     private String autor;
-    private String mensagem;
-    private LocalDateTime dataCriacao;
+    private String texto;
+    private LocalDateTime data;
     private Long pontoTuristicoId;
 
-    public ComentarioDTO(Comentario comentario) {
-        this.id = comentario.getId();
-        this.autor = comentario.getAutor();
-        this.mensagem = comentario.getMensagem();
-        this.dataCriacao = comentario.getDataCriacao();
-        this.pontoTuristicoId = comentario.getPontoTuristicoId();
+    public ComentarioDTO() {
     }
 
-    // Getters
-    public Long getId() { return id; }
-    public String getAutor() { return autor; }
-    public String getMensagem() { return mensagem; }
-    public LocalDateTime getDataCriacao() { return dataCriacao; }
-    public Long getPontoTuristicoId() { return pontoTuristicoId; }
+    public ComentarioDTO(String autor, String texto, LocalDateTime data, Long pontoTuristicoId) {
+        this.autor = autor;
+        this.texto = texto;
+        this.data = data;
+        this.pontoTuristicoId = pontoTuristicoId;
+    }
+
+    public ComentarioDTO(Comentario comentario) {
+        this.autor = comentario.getAutor();
+        this.texto = comentario.getTexto();
+        this.data = comentario.getData();
+        if (comentario.getPontoTuristico() != null) {
+            this.pontoTuristicoId = comentario.getPontoTuristico().getId();
+        }
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+
+    public Long getPontoTuristicoId() {
+        return pontoTuristicoId;
+    }
+
+    public void setPontoTuristicoId(Long pontoTuristicoId) {
+        this.pontoTuristicoId = pontoTuristicoId;
+    }
 }

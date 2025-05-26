@@ -1,36 +1,76 @@
 package br.com.juridico.totvs.fullstack.Backend.domain;
 
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDateTime;
 
+@Entity
 public class Comentario {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String autor;
-    private String mensagem;
-    private LocalDateTime dataCriacao;
-    private Long pontoTuristicoId;
+    private String texto;
+    private LocalDateTime data;
 
-    public Comentario() {}
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "ponto_turistico_id", nullable = false)
+    private PontoTuristico pontoTuristico;
 
-    public Comentario(Long id, String autor, String mensagem, LocalDateTime dataCriacao, Long pontoTuristicoId) {
-        this.id = id;
-        this.autor = autor;
-        this.mensagem = mensagem;
-        this.dataCriacao = dataCriacao;
-        this.pontoTuristicoId = pontoTuristicoId;
+    public Comentario() {
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    public Comentario(String autor, String texto, LocalDateTime data, PontoTuristico pontoTuristico) {
+        this.autor = autor;
+        this.texto = texto;
+        this.data = data;
+        this.pontoTuristico = pontoTuristico;
+    }
 
-    public String getAutor() { return autor; }
-    public void setAutor(String autor) { this.autor = autor; }
+    // Getters e Setters
 
-    public String getMensagem() { return mensagem; }
-    public void setMensagem(String mensagem) { this.mensagem = mensagem; }
+    public Long getId() {
+        return id;
+    }
 
-    public LocalDateTime getDataCriacao() { return dataCriacao; }
-    public void setDataCriacao(LocalDateTime dataCriacao) { this.dataCriacao = dataCriacao; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public Long getPontoTuristicoId() { return pontoTuristicoId; }
-    public void setPontoTuristicoId(Long pontoTuristicoId) { this.pontoTuristicoId = pontoTuristicoId; }
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public String getTexto() {
+        return texto;
+    }
+
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    public LocalDateTime getData() {
+        return data;
+    }
+
+    public void setData(LocalDateTime data) {
+        this.data = data;
+    }
+
+    public PontoTuristico getPontoTuristico() {
+        return pontoTuristico;
+    }
+
+    public void setPontoTuristico(PontoTuristico pontoTuristico) {
+        this.pontoTuristico = pontoTuristico;
+    }
 }
