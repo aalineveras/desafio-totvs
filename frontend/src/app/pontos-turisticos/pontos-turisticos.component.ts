@@ -48,11 +48,13 @@ export class PontosTuristicosComponent implements OnInit {
     data: new Date()
   };
 
+  // Garantir que a data seja em UTC ou no horário local
   confirmComentario(): void {
     const comentario = {
       ...this.novoComentario,
       pontoTuristicoId: this.detailed.id,
-      data: new Date()
+      // Converte para UTC ou para o horário local
+      data: new Date().toISOString()  // Converte para formato ISO 8601 em UTC
     };
 
     this.http.post(this.urlComentarios, comentario).subscribe(() => {
@@ -63,9 +65,15 @@ export class PontosTuristicosComponent implements OnInit {
     });
   }
 
+
   carregarComentarios(pontoId: number): void {
-    this.http.get<any[]>(`${this.urlComentarios}/ponto/${pontoId}`)
-      .subscribe(res => this.comentarios = res);
+    this.http.get<any[]>(`${this.urlComentarios}/ponto/${pontoId}`).subscribe(res => {
+      // Ajuste a data para garantir que o formato seja correto
+      this.comentarios = res.map(comentario => {
+        comentario.data = new Date(comentario.data); // Convertendo a data para objeto Date
+        return comentario;
+      });
+    });
   }
 
 
@@ -247,11 +255,11 @@ export class PontosTuristicosComponent implements OnInit {
   ];
 
   readonly detailFields: Array<PoDynamicViewField> = [
-    { property: 'nome', label: 'Ponto Turístico' },
-    { property: 'pais', label: 'País' },
-    { property: 'cidade', label: 'Cidade' },
-    { property: 'estacao', label: 'Melhor estação do ano', tag: true },
-    { property: 'resumo', label: 'Resumo' },
+    { property: 'nome', label: 'Ponto Turístico', gridColumns: 12 },
+    { property: 'pais', label: 'País', gridColumns: 4 },
+    { property: 'cidade', label: 'Cidade', gridColumns: 4 },
+    { property: 'estacao', label: 'Melhor estação do ano', tag: true, gridColumns: 4 },
+    { property: 'resumo', label: 'Resumo', gridColumns: 12 },
   ];
 
   readonly tableCustomActions: Array<PoPageDynamicTableCustomTableAction> = [

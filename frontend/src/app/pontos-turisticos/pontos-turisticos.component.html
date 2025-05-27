@@ -18,14 +18,17 @@
 
     <!-- Botão Comentar -->
     <div class="po-mt-3" *ngIf="!mostrarCaixaComentario">
-      <po-button p-label="Comentar" (p-click)="mostrarCaixaComentario = true"></po-button>
+      <po-button p-label="Comentar" (p-click)="mostrarCaixaComentario = true" p-kind="primary"></po-button>
     </div>
+
+    <!-- Espaço abaixo do botão Comentar -->
+    <div class="po-mb-3"></div> <!-- Adicionado para criar o espaço abaixo do botão "Comentar" -->
 
     <!-- Formulário de Comentário -->
     <form #optionsForm="ngForm" *ngIf="mostrarCaixaComentario">
       <div class="po-row po-mt-2">
         <!-- Nome do autor -->
-        <po-input 
+        <po-input
           class="po-md-12"
           name="autor"
           [(ngModel)]="novoComentario.autor"
@@ -35,7 +38,7 @@
         </po-input>
 
         <!-- Comentário -->
-        <po-textarea 
+        <po-textarea
           class="po-md-12 po-mt-2"
           name="texto"
           [(ngModel)]="novoComentario.texto"
@@ -46,20 +49,21 @@
         </po-textarea>
 
         <!-- Botão Publicar (desabilitado se os campos estiverem vazios) -->
-        <div class="po-md-12 po-mt-2">
+        <div class="po-md-12 po-mt-3">
           <po-button
             p-kind="primary"
             p-label="Publicar"
             (p-click)="confirmComentario()"
             [p-disabled]="optionsForm.invalid">
           </po-button>
+          
         </div>
       </div>
     </form>
 
     <!-- Lista ou mensagem se não houver comentários -->
     <div *ngIf="comentarios?.length > 0; else nenhumComentario">
-      <div *ngFor="let c of comentarios" class="po-mb-3">
+      <div *ngFor="let c of comentarios" class="po-mb-3 po-bg-color-04 po-p-3 po-radius">
         <div class="po-row po-between po-mb-1">
           <div class="po-col">
             <strong>{{ c.autor }}</strong>
@@ -70,13 +74,11 @@
         </div>
 
         <div class="po-text po-mb-1">{{ c.texto }}</div>
-        <po-divider></po-divider>
       </div>
     </div>
 
     <ng-template #nenhumComentario>
       <p class="po-mt-3">Seja o primeiro a comentar sobre esse lugar!</p>
-
     </ng-template>
   </po-modal>
 </po-page-default>

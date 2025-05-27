@@ -1,0 +1,25 @@
+.po-text {
+  font-size: 14px;
+  color: #555;
+}
+
+.po-row.po-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+.po-mb-1 {
+  margin-bottom: 10px;
+}
+
+.po-p-3 {
+  padding: 15px;
+}
+
+.po-bg-color-04 {
+  background-color: #f4f4f4; /* Cor de fundo suave */
+}
+
+.po-radius {
+  border-radius: 8px;
+}
