@@ -38,3 +38,12 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Gradle files
+/gradle-wrapper.jar
+/gradle-wrapper.properties
+/gradle/
+*.gradle
+gradle*/ 
+.gradle/
+build/
