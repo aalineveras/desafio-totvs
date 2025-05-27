@@ -1,75 +1,54 @@
-# Desafio Fullstack - Java
 
-Bem vindo ao desafio *Fullstack - Java do Desenvolvimento Jurídico*.
+# Projeto de Pontos Turísticos
 
-Neste desafio apresentamos a você um projeto voltado ao perfil Fullstack. Temos o *Backend* em Java e o *Frontend* em [Angular](https://angular.io/).
+Este projeto permite o cadastro e visualização de pontos turísticos e comentários. Ele foi desenvolvido com **Angular 17.3.12**, **PO-UI 7.26.1** e **@totvs/po-theme 7.26.1** para o frontend, e **Spring Boot** para o backend.
 
-Optamos pelo Front ser em [Angular](https://angular.io/) pois é o que será utilizado diariamente e o Back em Java por ser a mais conhecida entre os analistas.
+## Funcionalidades
 
-Outro detalhe é que utilizamos o [PO-UI](https://po-ui.io/) como *Design System* neste projeto pois é o padrão da empresa. Utilize os demais componentes presentes na biblioteca dele para criar as próximas interfaces. A documentação é bem rica e contem a sessão de exemplos de uso de cada componente para entender como ele funciona.
+- **Tela Inicial**: Exibe a lista de pontos turísticos cadastrados, com barra de pesquisa, botão Novo.
+- **Cadastro de Ponto Turístico**: Formulário para adicionar novos pontos com nome do Ponto Turistico, país, cidade, estação do ano e resumo.
+- **Detalhes**: Modal exibe informações detalhadas do ponto turístico e seus comentários e botão para comentar.
+- **Comentários**: Exibe e permite adicionar novos comentários aos pontos turísticos.
 
-## Escopo do desafio
+## Backend (Java - Spring Boot)
 
-O sistema é um cadastro de Pontos turisticos. 
+- **Endpoints**:
+  - `GET /ponto-turistico`: Listar pontos turísticos.
+  - `POST /ponto-turistico`: Criar um novo ponto turístico.
+  - `GET /ponto-turistico/{id}`: Obter detalhes de um ponto turístico.
+  - `DELETE /ponto-turistico/{id}`: Excluir ponto turístico.
+  - `PUT /ponto-turistico/{id}`: Atualizar ponto turístico.
+  - `GET /comentario/{pontoTuristicoId}`: Listar comentários de um ponto.
+  - `POST /comentario`: Adicionar um comentário.
 
-Ele contem três classes: `País`, `Ponto Turístico` e `Comentário`.
+## Como Rodar o Projeto
 
-O `Ponto turístico` é a classe principal do Projeto. Ela está amarrada à Classe `País` que o agrupa e tem a classe `Comentário` que a referência.
+1. Clone o repositório e entre no diretório:
+   ```bash
+   git clone <URL do seu repositório>
+   cd <diretório>
+   ```
 
-## O que deve ser feito
+2. Instale as dependências:
+   ```bash
+   npm install
+   ```
 
-No projeto atual cuidamos de criar a estrutura principal do projeto e criamos o CRUD do País para que utilize como base para resolver os proximos passos.
+3. Rode o servidor de desenvolvimento:
+   ```bash
+   ng serve
+   ```
 
-Dito isso, solicitamos que desenvolva as seguintes funcionalidades:
+4. Acesse o frontend em: `http://localhost:4200/ponto-turistico`.
 
-- CRUD de Ponto Turistico
-- CRUD de Comentário
+5. Para o backend, use o comando:
+   ```bash
+   ./gradlew bootRun
+   ```
+   Acesse a API em: `http://localhost:8080`.
 
-Dentro dessas funcionalidades temos as seguintes necessidades:
+## Tecnologias
 
-- Ao cadastrar o Ponto turistico desejo informar alem do País, a cidade, o nome do ponto turístico, qual a melhor estação para visita-la e desejo ver um resumo do Ponto turístico.
-
-- Cada ponto turistico poderá ter vários comentários. Cada comentário deverá mostrar o Nome do autor, o comentário e a data em que foi criado.
-
-- Se possível gostaria de visualizar a lista de comentários sempre que entrar em um ponto turístico e se não houver um comentário, que a pagina me convide a ser o primeiro a comentar sobre o lugar.
-
-
-## Como deverá ser entregue o projeto
-
-A entrega final será o próprio repositório do projeto. Realize uma cópia dele para o seu perfil do GitHub e realize todos os ajustes que entender necessário para resolver os problemas acima.
-
-## Alguns pontos relevantes!
-
-### No Front-end
-A parte do Front tem uma estrutura criada mas é uma "sugestão" de estrutura. Visto que há muitas pessoas acostumadas a utilizar `React` resolvemos criar a estrutura base para agilizar o desenvolvimento. Porem essa estrutura pode ser alterada se desejar. 
-
-Somente não altere os componentes iniciais de cada tela `po-page-default` e `po-page-detail`. 
-
-### No Back-end
-
-No projeto Java já definimos algumas pastas:
-
-- Controller
-  - Crie nela as classes RestController
-- Domain
-  - Crie as classes de persistência
-- Service
-  - Crie as classes de regra de negócio.
-- Service.dto
-  - Crie as classes de transferência de dados
-
-Pedimos que respeite essa hierarquia de pastas.
-
-### Controle de versão
-
-Para o controle de versão incentivamos que crie quantos commits quiser, crie quando desejar
-
-Outro ponto importante é que somente iremos considerar os commits realizados até o envio do e-mail. Os commits que forem realizados após o horário de envio não serão considerados na avaliação.
-
-Após a realização do ultimo commit não esqueça de fazer o `Push` para o repositório!
-
-### Outros detalhes
-
-Documente as funcionalidades, dê o maximo de detalhe que puder, isso irá nos auxiliar durante a avaliação.
-
-Por fim, boa sorte e até logo.
+- **Frontend**: Angular 17.3.12, PO-UI 7.26.1, @totvs/po-theme 7.26.1.
+- **Backend**: Spring Boot, JPA, H2 (ou outro banco de dados).
+- **Postman**: Para testar as APIs.
